@@ -1,0 +1,758 @@
+.viewer-container {
+  height: 100%;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  position: relative;
+}
+
+.component-card {
+  transition: all 0.2s ease-in-out;
+  border-radius: 0.5rem;
+}
+
+.component-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.highlight-button {
+  transition: all 0.2s ease;
+  border-radius: 0.375rem;
+}
+
+.highlight-button:hover {
+  transform: scale(1.02);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.viewer-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.components-section {
+  background: white;
+  border-left: 1px solid #dee2e6;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.components-panel {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5rem;
+}
+
+.components-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.components-panel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.components-panel::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.components-panel::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+.mobile-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: none;
+}
+
+.mobile-handle {
+  height: 4px;
+  width: 40px;
+  background: #dee2e6;
+  border-radius: 2px;
+  margin: 8px auto;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mobile-handle:hover {
+  background: #adb5bd;
+}
+
+.file-input-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.file-input::-webkit-file-upload-button {
+  border: none;
+  background-color: #000000;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.file-input::-webkit-file-upload-button:hover {
+  background-color: #010813;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #390162 0%, #fd0187 100%);
+  box-shadow: 0 2px 4px rgba(254, 253, 253, 0.1);
+  padding: 1rem;
+color: #ffffff;
+}
+
+.app-header small.app-subtitle {
+  color: #ffd700;   /* ← change to any hex / css color you want */
+  opacity: 1;       /* remove the previous opacity-75 effect if desired */
+}
+
+/* Example: white subtitle on dark gradient header */
+.app-header small.app-subtitle {
+  color: #ffffff;
+}
+
+/* Example: different color on small screens */
+@media (max-width: 575px) {
+  .app-header small.app-subtitle {
+    color: #cce7ff;
+  }
+}
+
+.app-footer {
+  background: #212529;
+  color: white;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+}
+
+.component-card .card-body {
+  padding: 1rem;
+}
+
+.component-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.component-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  word-break: break-word;
+}
+
+.component-meta {
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(248, 249, 250, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.loading-spinner {
+  border-width: 3px;
+  width: 2rem;
+  height: 2rem;
+}
+
+.controls-hint {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(33, 37, 41, 0.8);
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  backdrop-filter: blur(4px);
+  z-index: 5;
+}
+
+@media (min-width: 1200px) {
+  .components-section {
+    width: 350px;
+    flex-shrink: 0;
+  }
+ 
+  .component-card .card-body {
+    padding: 1.25rem;
+  }
+ 
+  .app-header {
+    padding: 1.5rem;
+  }
+ 
+  .controls-hint {
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
+
+  .mobile-toggle-btn {
+    display: none;
+  }
+
+  .mobile-handle {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .components-section {
+    width: 320px;
+    flex-shrink: 0;
+  }
+ 
+  .component-title {
+    font-size: 0.95rem;
+  }
+ 
+  .app-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .mobile-toggle-btn {
+    display: none;
+  }
+
+  .mobile-handle {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .components-section {
+    position: relative;
+    transform: none;
+  }
+ 
+  .components-section.mobile-hidden {
+    transform: none;
+  }
+ 
+  .mobile-handle {
+    display: none;
+  }
+ 
+  .mobile-toggle-btn {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .main-content {
+    flex-direction: column;
+  }
+ 
+  .viewer-section {
+    height: 60vh;
+    min-height: 400px;
+  }
+ 
+  .components-section {
+    height: 40vh;
+    border-left: none;
+    border-top: 1px solid #dee2e6;
+    position: relative;
+  }
+ 
+  .components-panel {
+    max-height: calc(40vh - 4rem);
+  }
+ 
+  .app-header h2 {
+    font-size: 1.4rem;
+  }
+ 
+  .controls-hint {
+    position: relative;
+    margin: 1rem;
+    text-align: center;
+  }
+ 
+  .component-card {
+    margin-bottom: 0.75rem;
+  }
+
+  .mobile-toggle-btn {
+    display: none;
+  }
+
+  .mobile-handle {
+    display: none;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .main-content {
+    flex-direction: column;
+  }
+ 
+  .viewer-section {
+    height: 55vh;
+    min-height: 350px;
+  }
+ 
+  .components-section {
+    height: 45vh;
+    border-left: none;
+    border-top: 1px solid #dee2e6;
+    position: relative;
+  }
+ 
+  .app-header {
+    padding: 1rem;
+  }
+ 
+  .app-header h2 {
+    font-size: 1.3rem;
+  }
+ 
+  .app-header .row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+ 
+  .controls-hint {
+    position: relative;
+    margin: 0.5rem;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+ 
+  .component-card .card-body {
+    padding: 0.75rem;
+  }
+ 
+  .component-title {
+    font-size: 0.9rem;
+  }
+ 
+  .highlight-button {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+
+  .mobile-toggle-btn {
+    display: none;
+  }
+
+  .mobile-handle {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .app-container {
+    height: 100vh;
+    height: 100dvh;
+  }
+ 
+  .main-content {
+    flex-direction: column;
+    position: relative;
+  }
+ 
+  .viewer-section {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
+    position: relative;
+  }
+ 
+  .components-section {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50vh;
+    height: 50dvh;
+    max-height: 60vh;
+    border-left: none;
+    border-top: 1px solid #dee2e6;
+    border-radius: 1rem 1rem 0 0;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    z-index: 999;
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .components-section.mobile-hidden {
+    transform: translateY(calc(100% - 60px));
+  }
+ 
+  .app-header {
+    padding: 0.75rem;
+    position: relative;
+    z-index: 10;
+  }
+ 
+  .app-header h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+  }
+ 
+  .app-header small {
+    font-size: 0.75rem;
+  }
+ 
+  .app-header .row {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+ 
+  .app-footer {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    position: relative;
+    z-index: 10;
+  }
+ 
+  .app-footer .d-flex {
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: center;
+  }
+ 
+  .controls-hint {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    text-align: center;
+    margin: 0;
+  }
+ 
+  .components-panel {
+    padding: 0.25rem;
+    max-height: calc(50vh - 80px);
+  }
+ 
+  .component-card {
+    margin-bottom: 0.5rem;
+  }
+ 
+  .component-card .card-body {
+    padding: 0.5rem;
+  }
+ 
+  .component-title {
+    font-size: 0.85rem;
+    margin-bottom: 0.125rem;
+  }
+ 
+  .component-meta {
+    font-size: 0.7rem;
+  }
+ 
+  .highlight-button {
+    font-size: 0.8rem;
+    padding: 0.375rem 0.5rem;
+  }
+ 
+  .file-input {
+    font-size: 0.875rem;
+  }
+ 
+  .file-input::-webkit-file-upload-button {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8rem;
+  }
+ 
+  .form-check-input {
+    transform: scale(1.1);
+  }
+ 
+  .btn {
+    min-height: 44px;
+  }
+
+  .mobile-handle {
+    display: block;
+    background: #adb5bd;
+    margin: 12px auto 8px;
+  }
+
+  .mobile-toggle-btn {
+    display: flex;
+  }
+
+  .form-select {
+    min-height: 44px;
+    font-size: 0.875rem;
+  }
+
+  .btn-group .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    min-height: 44px;
+  }
+
+  .row.g-2 {
+    gap: 0.5rem !important;
+  }
+
+  .row.g-2 > .col-12 {
+    margin-bottom: 0.5rem;
+  }
+
+  .row.g-2 > .col-12:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 767px) and (orientation: landscape) {
+  .viewer-section {
+    height: 100vh;
+    height: 100dvh;
+  }
+ 
+  .components-section {
+    height: 40vh;
+    height: 40dvh;
+    max-height: 50vh;
+  }
+ 
+  .app-header {
+    padding: 0.5rem;
+  }
+ 
+  .app-header h2 {
+    font-size: 1.1rem;
+  }
+ 
+  .controls-hint {
+    font-size: 0.7rem;
+    padding: 0.375rem;
+  }
+
+  .components-panel {
+    max-height: calc(40vh - 80px);
+  }
+}
+
+@media (max-width: 320px) {
+  .app-header h2 {
+    font-size: 1rem;
+  }
+ 
+  .component-title {
+    font-size: 0.8rem;
+  }
+ 
+  .component-meta {
+    font-size: 0.65rem;
+  }
+ 
+  .highlight-button {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.375rem;
+  }
+ 
+  .controls-hint {
+    font-size: 0.65rem;
+    padding: 0.25rem;
+  }
+
+  .components-section {
+    height: 45vh;
+    height: 45dvh;
+  }
+
+  .mobile-toggle-btn {
+    width: 48px;
+    height: 48px;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+@media print {
+  .app-header,
+  .app-footer,
+  .components-section,
+  .mobile-toggle-btn {
+    display: none !important;
+  }
+ 
+  .viewer-section {
+    height: 100vh !important;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .component-card {
+    border-width: 0.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .component-card,
+  .highlight-button,
+  .file-input::-webkit-file-upload-button,
+  .components-section {
+    transition: none;
+  }
+ 
+  .component-card:hover {
+    transform: none;
+  }
+ 
+  .highlight-button:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .viewer-container {
+    background-color: #212529;
+    border-color: #495057;
+  }
+ 
+  .components-section {
+    background: #343a40;
+    border-color: #495057;
+  }
+ 
+  .component-card {
+    background: #495057;
+    border-color: #6c757d;
+  }
+ 
+  .component-card .card-body {
+    color: #f8f9fa;
+  }
+ 
+  .component-meta {
+    color: #adb5bd;
+  }
+  
+
+  .mobile-handle {
+    background: #6c757d;
+  }
+
+  .mobile-toggle-btn {
+    background: #0d6efd;
+    color: white;
+  }
+}
+
+/* Prefer modern native control styling (Chrome/Edge/Firefox support accent-color) */
+.components-panel .form-check-input {
+  /* change the checkbox check/fill color */
+  accent-color: #000000;       /* the check-mark/fill color (modern browsers) */
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.15rem;
+  margin-left: 0;
+  border-radius: 0.25rem;      /* subtle rounded square */
+  box-shadow: none;
+}
+
+/* ensure checked box uses desired border/background on browsers that style via background */
+.components-panel .form-check-input:checked {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+/* Optional fallback for older browsers that ignore accent-color:
+   Creates a custom-looking checkbox by removing native appearance */
+.components-panel .form-check-input.custom-fallback {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0.15rem 0 0 0;
+  border: 1.5px solid #6c757d;
+  border-radius: 0.25rem;
+  background-clip: content-box;
+  vertical-align: middle;
+  position: relative;
+}
+
+.components-panel .form-check-input.custom-fallback:checked {
+  background-color: #000;
+  border-color: #000;
+}
+
+/* draw a check mark for the fallback */
+.components-panel .form-check-input.custom-fallback:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(40deg);
+}
+
+/* Icon (label) color control:
+   default icon color in the list (muted)
+   and black when checkbox is checked */
+.components-panel .form-check-label i {
+  color: #6c757d; /* default grey */
+}
+
+/* when the checkbox is checked, color the icon black */
+.components-panel .form-check-input:checked + .form-check-label i {
+  color: #000000;
+}
+
+/* if your label contains text classes like text-success or text-muted,
+   you may need stronger specificity (only if the icon color doesn't change) */
+.components-panel .form-check-input:checked + .form-check-label i,
+.components-panel .form-check-label i {
+  /* fallback force (avoid unless necessary): */
+  /* color: #000 !important; */
+}

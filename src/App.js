@@ -15,10 +15,10 @@ function App() {
       const width = window.innerWidth;
       const isMobileDevice = width <= 767;
       const isTabletDevice = width >= 768 && width <= 991;
-      
+
       setIsMobile(isMobileDevice);
       setIsTablet(isTabletDevice);
-      
+
       if (isMobileDevice && componentList.length === 0) {
         setShowComponents(false);
       } else if (!isMobileDevice) {
@@ -28,7 +28,7 @@ function App() {
 
     checkDeviceType();
     window.addEventListener('resize', checkDeviceType);
-    
+
     return () => window.removeEventListener('resize', checkDeviceType);
   }, [componentList.length]);
 
@@ -46,24 +46,24 @@ function App() {
   };
 
   const handleMobilePanelToggle = () => {
-  if (isMobile) {
-    setIsComponentsPanelMinimized(!isComponentsPanelMinimized);
-  }
-};
+    if (isMobile) {
+      setIsComponentsPanelMinimized(!isComponentsPanelMinimized);
+    }
+  };
 
   const handleHighlight = (id) => {
     const component = componentList.find(comp => comp.userData.expressID === id);
     if (!component) return;
 
     const originalMaterial = component.userData.originalMaterial;
-    
+
     const highlightMaterial = originalMaterial.clone();
     highlightMaterial.color.setHex(0xff0000);
     highlightMaterial.emissive.setHex(0x330000);
-    
+
     let blinkCount = 0;
     const maxBlinks = 8;
-    
+
     const blink = () => {
       if (blinkCount % 2 === 0) {
         component.material = highlightMaterial;
@@ -71,7 +71,7 @@ function App() {
         component.material = originalMaterial;
       }
       blinkCount++;
-      
+
       if (blinkCount < maxBlinks) {
         setTimeout(blink, 250);
       } else {
@@ -79,7 +79,7 @@ function App() {
         setSelectedId(null);
       }
     };
-    
+
     setSelectedId(id);
     blink();
     console.log('Highlight component:', id);
@@ -110,7 +110,7 @@ function App() {
           </div>
         </div>
       </header>
-      
+
       <main className="main-content">
         <section className="viewer-section">
           <IfcViewer
@@ -118,20 +118,23 @@ function App() {
             onComponentList={handleComponentListUpdate}
           />
         </section>
-        
+
         {isMobile && showComponents && (
           <>
-            <button 
+            <button
               className="btn btn-dark mobile-toggle-btn"
               onClick={handleMobilePanelToggle}
               title="Toggle Components Panel"
             >
               <i className={`bi ${isComponentsPanelMinimized ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
             </button>
-            
-            <aside className={`components-section ${isComponentsPanelMinimized ? 'mobile-hidden' : ''}`}>
+
+            <aside
+              className={`components-section ${isComponentsPanelMinimized ? 'mobile-hidden' : ''}`}
+              style={{ backgroundColor: 'white' }}
+            >
               <div className="mobile-handle" onClick={handleMobilePanelToggle}></div>
-              
+
               <div className="h-100 p-2">
                 <div className="d-flex align-items-center justify-content-between mb-3">
                   <h5 className="mb-0 d-flex align-items-center">
@@ -141,7 +144,7 @@ function App() {
                       <span className="badge components-count-badge ms-2">{componentList.length}</span>
                     )}
                   </h5>
-                  
+
                 </div>
                 <ComponentsPanel
                   selectedId={selectedId}
@@ -153,9 +156,9 @@ function App() {
             </aside>
           </>
         )}
-        
+
         {!isMobile && showComponents && (
-          <aside className={`components-section ${isTablet ? 'col-12' : 'col-md-3'}`}>
+          <aside className={`components-section ${isTablet ? 'col-12' : 'col-md-3'}`} style={{ backgroundColor: 'white' }}>
             <div className="h-100 p-2 p-md-3">
               <div className="d-flex align-items-center justify-content-between mb-3">
                 <h5 className="mb-0 d-flex align-items-center">
@@ -165,7 +168,7 @@ function App() {
                     <span className="badge bg-dark ms-2">{componentList.length}</span>
                   )}
                 </h5>
-              
+
               </div>
               <ComponentsPanel
                 selectedId={selectedId}

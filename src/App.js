@@ -129,7 +129,7 @@ function App() {
               <i className={`bi ${isComponentsPanelMinimized ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
             </button>
             
-            <aside className={`components-section ${isComponentsPanelMinimized ? 'mobile-hidden' : ''}`}>
+            <aside className={`components-section ${isComponentsPanelMinimized ? 'mobile-hidden' : ''}`} style={{ backgroundColor: 'white' }}>
               <div className="mobile-handle" onClick={handleMobilePanelToggle}></div>
               
               <div className="h-100 p-2">
@@ -155,7 +155,7 @@ function App() {
         )}
         
         {!isMobile && showComponents && (
-          <aside className={`components-section ${isTablet ? 'col-12' : 'col-md-3'}`}>
+          <aside className={`components-section ${isTablet ? 'col-12' : 'col-md-3'}`} style={{ backgroundColor: 'white' }}>
             <div className="h-100 p-2 p-md-3">
               <div className="d-flex align-items-center justify-content-between mb-3">
                 <h5 className="mb-0 d-flex align-items-center">
